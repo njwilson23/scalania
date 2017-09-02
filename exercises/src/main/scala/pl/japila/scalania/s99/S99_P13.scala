@@ -8,5 +8,18 @@ object S99_P13 {
    * scala> encodeDirect(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))
    * res0: List[(Int, Symbol)] = List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e))
    */
-  def encodeDirect[T](ts: Seq[T]): Seq[(Int, T)] = ???
+
+  def _encode_acc[T](acc: (Int, T), ts: Seq[T]): Seq[(Int, T)] =
+    ts match {
+      case Nil => Seq(acc)
+      case a :: b => if (acc._2 == a) _encode_acc(Tuple2(acc._1 + 1, a), b)
+      else Seq(acc) ++ _encode_acc(Tuple2(1, a), b)
+    }
+
+  def encodeDirect[T](ts: Seq[T]): Seq[(Int, T)] =
+    ts match {
+      case Nil => Nil
+      case a :: b => _encode_acc(Tuple2(1, a), b)
+    }
+
 }
