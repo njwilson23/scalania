@@ -7,6 +7,6 @@ object S99_P20 {
     ("my own implementation", removeAt)
   )
 
-  def removeAt[T](n: Int, ts: Seq[T]): (Seq[Any], Any) = ???
+  def removeAt[T](n: Int, ts: Seq[T]): (Seq[Any], Any) = (ts.take(n) ++ ts.drop(n + 1), ts.take(n + 1).last)
 
 }
