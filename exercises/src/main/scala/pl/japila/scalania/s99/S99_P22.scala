@@ -8,5 +8,7 @@ object S99_P22 {
     ("my own implementation", range)
   )
 
-  def range(from: Int, to: Int): Seq[Int] = ???
+  def range(from: Int, to: Int): Seq[Int] =
+    if (from == to) Seq(to)
+    else Seq(from) ++ range(from + 1, to)
 }

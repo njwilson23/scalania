@@ -12,6 +12,8 @@ object S99_P28 {
     ("my own implementation", lsortFreq)
   )
 
-  def lsort[T](ts: Seq[Seq[T]]): Seq[Seq[T]] = ???
-  def lsortFreq[T](tss: Seq[Seq[T]]): Seq[Seq[T]] = ???
+  def lsort[T](ts: Seq[Seq[T]]): Seq[Seq[T]] = ts.sortWith(_.length < _.length)
+
+  def _freq[T](len: Int, tss: Seq[Seq[T]]): Int = tss.filter(_.length == len).length
+  def lsortFreq[T](tss: Seq[Seq[T]]): Seq[Seq[T]] = tss.sortWith((a: Seq[T], b: Seq[T]) => { _freq(a.length, tss) < _freq(b.length, tss) }: Boolean)
 }
